@@ -187,9 +187,21 @@ namespace AtividadesProcImagem
             {
                 for (y = 0; y < addImage.Height; y++)
                 {
-                    //vImg1Gray[x, y] = pixelIntensity;
-                    //vImg2Gray[x, y] = pixelIntensity2;
-                    Console.WriteLine(vImg2Gray[x, y]);
+
+                    Color newColor = new Color();
+                    byte newR = (byte)((int)vImg1R[x,y] + (int)vImg2R[x,y]);
+                    byte newG = (byte)((int)vImg1G[x, y] + (int)vImg2G[x, y]);
+                    byte newB = (byte)((int)vImg1B[x, y] + (int)vImg2B[x, y]);
+                    Console.WriteLine("------------------");
+                    if (newR > 255) Console.WriteLine(newR);
+                    if (newG > 255) Console.WriteLine(newG);
+                    if (newB > 255) Console.WriteLine(newB);
+
+
+                    Console.WriteLine("------------------");
+                    newColor = Color.FromArgb(newR, newG, newB);
+
+                    addImage.SetPixel(x, y, newColor);
 
                     //addImage.SetPixel(x, y, Convert.ToColor)
 
@@ -199,7 +211,7 @@ namespace AtividadesProcImagem
                 }
             }
 
-            // pictureBox3.Image = (Bitmap)pictureBox1.Image + (Bitmap)pictureBox2.Image;
+            pictureBox3.Image = addImage;
         }
     }
 }
