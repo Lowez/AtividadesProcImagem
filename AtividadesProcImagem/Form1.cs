@@ -189,9 +189,14 @@ namespace AtividadesProcImagem
                 {
 
                     Color newColor = new Color();
-                    byte newR = (byte)((int)vImg1R[x,y] + (int)vImg2R[x,y]);
-                    byte newG = (byte)((int)vImg1G[x, y] + (int)vImg2G[x, y]);
-                    byte newB = (byte)((int)vImg1B[x, y] + (int)vImg2B[x, y]);
+                    //byte newR = (byte)((int)vImg1R[x,y] + (int)vImg2R[x,y]);
+                    //byte newG = (byte)((int)vImg1G[x, y] + (int)vImg2G[x, y]);
+                    //byte newB = (byte)((int)vImg1B[x, y] + (int)vImg2B[x, y]);
+                    //byte newA = (byte)((int)vImg1A[x, y] + (int)vImg2A[x, y]);
+                    int newR = (int)vImg1R[x, y] + (int)vImg2R[x, y];
+                    int newG = (int)vImg1G[x, y] + (int)vImg2G[x, y];
+                    int newB = (int)vImg1B[x, y] + (int)vImg2B[x, y];
+                    int newA = (int)vImg1A[x, y] + (int)vImg2A[x, y];
                     Console.WriteLine("------------------");
                     if (newR > 255) Console.WriteLine(newR);
                     if (newG > 255) Console.WriteLine(newG);
@@ -199,7 +204,7 @@ namespace AtividadesProcImagem
 
 
                     Console.WriteLine("------------------");
-                    newColor = Color.FromArgb(newR, newG, newB);
+                    newColor = Color.FromArgb((byte)newA, (byte)newR, (byte)newG, (byte)newB);
 
                     addImage.SetPixel(x, y, newColor);
 
