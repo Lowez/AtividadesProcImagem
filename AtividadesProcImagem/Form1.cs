@@ -183,40 +183,126 @@ namespace AtividadesProcImagem
 
             int x, y;
 
-            for (x = 0; x < addImage.Width; x++)
+            for (x = 0; x < image1.Width; x++)
             {
-                for (y = 0; y < addImage.Height; y++)
+                for (y = 0; y < image1.Height; y++)
                 {
 
                     Color newColor = new Color();
-                    //byte newR = (byte)((int)vImg1R[x,y] + (int)vImg2R[x,y]);
-                    //byte newG = (byte)((int)vImg1G[x, y] + (int)vImg2G[x, y]);
-                    //byte newB = (byte)((int)vImg1B[x, y] + (int)vImg2B[x, y]);
-                    //byte newA = (byte)((int)vImg1A[x, y] + (int)vImg2A[x, y]);
                     int newR = (int)vImg1R[x, y] + (int)vImg2R[x, y];
+                    newR = newR >= 255 ? 255 : newR;
                     int newG = (int)vImg1G[x, y] + (int)vImg2G[x, y];
+                    newG = newG >= 255 ? 255 : newG;
                     int newB = (int)vImg1B[x, y] + (int)vImg2B[x, y];
+                    newB = newB >= 255 ? 255 : newB;
                     int newA = (int)vImg1A[x, y] + (int)vImg2A[x, y];
-                    Console.WriteLine("------------------");
-                    if (newR > 255) Console.WriteLine(newR);
-                    if (newG > 255) Console.WriteLine(newG);
-                    if (newB > 255) Console.WriteLine(newB);
+                    newA = newA >= 255 ? 255 : newA;
 
-
-                    Console.WriteLine("------------------");
-                    newColor = Color.FromArgb((byte)newA, (byte)newR, (byte)newG, (byte)newB);
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
 
                     addImage.SetPixel(x, y, newColor);
-
-                    //addImage.SetPixel(x, y, Convert.ToColor)
-
-                    //Color pixelColor = (image1.GetPixel(x, y));
-                    //Color newColor = Color.FromArgb(pixelColor.R, 0, 0);
-                    //addImage.SetPixel(x, y, newColor);
                 }
             }
 
             pictureBox3.Image = addImage;
+        }
+
+        private void subtracao_Click(object sender, EventArgs e)
+        {
+            Bitmap subtImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            Bitmap image2 = (Bitmap)pictureBox2.Image;
+
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = (int)vImg1R[x, y] - (int)vImg2R[x, y];
+                    newR = newR <= 0 ? 0 : newR;
+                    int newG = (int)vImg1G[x, y] - (int)vImg2G[x, y];
+                    newG = newG <= 0 ? 0 : newG;
+                    int newB = (int)vImg1B[x, y] - (int)vImg2B[x, y];
+                    newB = newB <= 0 ? 0 : newB;
+                    int newA = (int)vImg1A[x, y] - (int)vImg2A[x, y];
+                    newA = newA <= 0 ? 0 : newA;
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    subtImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = subtImage;
+        }
+
+        private void multiplicacao_Click(object sender, EventArgs e)
+        {
+            Bitmap multiImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            double fator = 1.0;
+            if (multiplicacaoInput.Text != "") fator = Convert.ToDouble(multiplicacaoInput.Text);
+
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = (int)((int)vImg1R[x, y] * fator);
+                    newR = newR >= 255 ? 255 : newR;
+                    int newG = (int)((int)vImg1G[x, y] * fator);
+                    newG = newG >= 255 ? 255 : newG;
+                    int newB = (int)((int)vImg1B[x, y] * fator);
+                    newB = newB >= 255 ? 255 : newB;
+                    int newA = (int)((int)vImg1A[x, y] * fator);
+                    newA = newA >= 255 ? 255 : newA;
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    multiImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = multiImage;
+        }
+
+        private void divisao_Click(object sender, EventArgs e)
+        {
+            Bitmap divisImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            double fator = 1.0;
+            if (divisaoInput.Text != "") fator = Convert.ToDouble(divisaoInput.Text);
+
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = (int)((int)vImg1R[x, y] / fator);
+                    newR = newR <= 0 ? 0 : newR;
+                    int newG = (int)((int)vImg1G[x, y] / fator);
+                    newG = newG <= 0 ? 0 : newG;
+                    int newB = (int)((int)vImg1B[x, y] / fator);
+                    newB = newB <= 0 ? 0 : newB;
+                    int newA = (int)((int)vImg1A[x, y] / fator);
+                    newA = newA <= 0 ? 0 : newA;
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    divisImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = divisImage;
         }
     }
 }
