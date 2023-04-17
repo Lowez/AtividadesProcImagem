@@ -13,10 +13,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace AtividadesProcImagem
 {
-    public partial class Form1 : Form
+    public partial class brightnessLabel : Form
     {
 
-        public Form1()
+        public brightnessLabel()
         {
             InitializeComponent();
         }
@@ -34,6 +34,8 @@ namespace AtividadesProcImagem
         byte[,] vImg2G;
         byte[,] vImg2B;
         byte[,] vImg2A;
+
+        int resultIndex = 0;
 
         private void load1_Click_1(object sender, EventArgs e)
         {
@@ -181,30 +183,61 @@ namespace AtividadesProcImagem
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
 
-            int x, y;
-
-            for (x = 0; x < image1.Width; x++)
+            if (Convert.ToInt32(bright.Value) != 10)
             {
-                for (y = 0; y < image1.Height; y++)
+                int fator = (Convert.ToInt32(bright.Value) * 10);
+
+                int x, y;
+
+                for (x = 0; x < image1.Width; x++)
                 {
+                    for (y = 0; y < image1.Height; y++)
+                    {
 
-                    Color newColor = new Color();
-                    int newR = (int)vImg1R[x, y] + (int)vImg2R[x, y];
-                    newR = newR >= 255 ? 255 : newR;
-                    int newG = (int)vImg1G[x, y] + (int)vImg2G[x, y];
-                    newG = newG >= 255 ? 255 : newG;
-                    int newB = (int)vImg1B[x, y] + (int)vImg2B[x, y];
-                    newB = newB >= 255 ? 255 : newB;
-                    int newA = (int)vImg1A[x, y] + (int)vImg2A[x, y];
-                    newA = newA >= 255 ? 255 : newA;
+                        Color newColor = new Color();
+                        int newR = (int)vImg1R[x, y] + fator;
+                        newR = newR >= 255 ? 255 : newR;
+                        int newG = (int)vImg1G[x, y] + fator;
+                        newG = newG >= 255 ? 255 : newG;
+                        int newB = (int)vImg1B[x, y] + fator;
+                        newB = newB >= 255 ? 255 : newB;
+                        int newA = (int)vImg1A[x, y] + fator;
+                        newA = newA >= 255 ? 255 : newA;
 
-                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+                        newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
 
-                    addImage.SetPixel(x, y, newColor);
+                        addImage.SetPixel(x, y, newColor);
+                    }
                 }
-            }
 
-            pictureBox3.Image = addImage;
+                pictureBox3.Image = addImage;
+            } else
+            {
+                int x, y;
+
+                for (x = 0; x < image1.Width; x++)
+                {
+                    for (y = 0; y < image1.Height; y++)
+                    {
+
+                        Color newColor = new Color();
+                        int newR = (int)vImg1R[x, y] + (int)vImg2R[x, y];
+                        newR = newR >= 255 ? 255 : newR;
+                        int newG = (int)vImg1G[x, y] + (int)vImg2G[x, y];
+                        newG = newG >= 255 ? 255 : newG;
+                        int newB = (int)vImg1B[x, y] + (int)vImg2B[x, y];
+                        newB = newB >= 255 ? 255 : newB;
+                        int newA = (int)vImg1A[x, y] + (int)vImg2A[x, y];
+                        newA = newA >= 255 ? 255 : newA;
+
+                        newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                        addImage.SetPixel(x, y, newColor);
+                    }
+                }
+
+                pictureBox3.Image = addImage;
+            }
         }
 
         private void subtracao_Click(object sender, EventArgs e)
@@ -213,30 +246,62 @@ namespace AtividadesProcImagem
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
 
-            int x, y;
-
-            for (x = 0; x < image1.Width; x++)
+            if (Convert.ToInt32(bright.Value) != 10)
             {
-                for (y = 0; y < image1.Height; y++)
+                int fator = (Convert.ToInt32(bright.Value) * 10);
+
+                int x, y;
+
+                for (x = 0; x < image1.Width; x++)
                 {
+                    for (y = 0; y < image1.Height; y++)
+                    {
 
-                    Color newColor = new Color();
-                    int newR = (int)vImg1R[x, y] - (int)vImg2R[x, y];
-                    newR = newR <= 0 ? 0 : newR;
-                    int newG = (int)vImg1G[x, y] - (int)vImg2G[x, y];
-                    newG = newG <= 0 ? 0 : newG;
-                    int newB = (int)vImg1B[x, y] - (int)vImg2B[x, y];
-                    newB = newB <= 0 ? 0 : newB;
-                    int newA = (int)vImg1A[x, y] - (int)vImg2A[x, y];
-                    newA = newA <= 0 ? 0 : newA;
+                        Color newColor = new Color();
+                        int newR = (int)vImg1R[x, y] - fator;
+                        newR = newR <= 0 ? 0 : newR;
+                        int newG = (int)vImg1G[x, y] - fator;
+                        newG = newG <= 0 ? 0 : newG;
+                        int newB = (int)vImg1B[x, y] - fator;
+                        newB = newB <= 0 ? 0 : newB;
+                        int newA = (int)vImg1A[x, y] - fator;
+                        newA = newA <= 0 ? 0 : newA;
 
-                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+                        newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
 
-                    subtImage.SetPixel(x, y, newColor);
+                        subtImage.SetPixel(x, y, newColor);
+                    }
                 }
-            }
 
-            pictureBox3.Image = subtImage;
+                pictureBox3.Image = subtImage;
+            }
+            else
+            {
+                int x, y;
+
+                for (x = 0; x < image1.Width; x++)
+                {
+                    for (y = 0; y < image1.Height; y++)
+                    {
+
+                        Color newColor = new Color();
+                        int newR = (int)vImg1R[x, y] - (int)vImg2R[x, y];
+                        newR = newR <= 0 ? 0 : newR;
+                        int newG = (int)vImg1G[x, y] - (int)vImg2G[x, y];
+                        newG = newG <= 0 ? 0 : newG;
+                        int newB = (int)vImg1B[x, y] - (int)vImg2B[x, y];
+                        newB = newB <= 0 ? 0 : newB;
+                        int newA = (int)vImg1A[x, y] - (int)vImg2A[x, y];
+                        newA = newA <= 0 ? 0 : newA;
+
+                        newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                        subtImage.SetPixel(x, y, newColor);
+                    }
+                }
+
+                pictureBox3.Image = subtImage;
+            }
         }
 
         private void multiplicacao_Click(object sender, EventArgs e)
@@ -454,6 +519,56 @@ namespace AtividadesProcImagem
             }
 
             pictureBox3.Image = blendImage;
+        }
+
+        private void multiplicacaoInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (multiplicacaoInput.Text != "")
+            {
+                pictureBox2.Enabled = false;
+                load2.Enabled = false;
+            }
+            else
+            {
+                pictureBox2.Enabled = true;
+                load2.Enabled = true;
+            }
+        }
+
+        private void divisaoInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (divisaoInput.Text != "")
+            {
+                pictureBox2.Enabled = false;
+                load2.Enabled = false;
+            }
+            else
+            {
+                pictureBox2.Enabled = true;
+                load2.Enabled = true;
+            }
+        }
+
+        private void bright_ValueChanged(object sender, EventArgs e)
+        {
+            brightLabel.Text = (Convert.ToInt32(bright.Value) * 10).ToString();
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            Bitmap finalImage = (Bitmap) pictureBox3.Image;
+
+            finalImage.Save(System.Windows.Forms.Application.StartupPath
+                + "\\img" + resultIndex + ".jpg");
+
+            resultIndex++;
+
+            MessageBox.Show("Imagem salva!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void rgbToGrey_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

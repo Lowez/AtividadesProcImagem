@@ -1,6 +1,6 @@
 ﻿namespace AtividadesProcImagem
 {
-    partial class Form1
+    partial class brightnessLabel
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.load1 = new System.Windows.Forms.Button();
             this.load2 = new System.Windows.Forms.Button();
@@ -44,7 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.multiplicacaoInput = new System.Windows.Forms.TextBox();
             this.divisaoInput = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.rgbToGrey = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.blending = new System.Windows.Forms.Button();
             this.blendingFactor = new System.Windows.Forms.TextBox();
@@ -54,9 +58,20 @@
             this.btAND = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.save = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.historigrama = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.bright = new System.Windows.Forms.TrackBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.brightLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.historigrama)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bright)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -72,10 +87,11 @@
             // load1
             // 
             this.load1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.load1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.load1.ForeColor = System.Drawing.Color.Black;
-            this.load1.Location = new System.Drawing.Point(84, 305);
+            this.load1.Location = new System.Drawing.Point(78, 305);
             this.load1.Name = "load1";
-            this.load1.Size = new System.Drawing.Size(109, 30);
+            this.load1.Size = new System.Drawing.Size(122, 42);
             this.load1.TabIndex = 2;
             this.load1.Text = "Carregar Imagem 1";
             this.load1.UseVisualStyleBackColor = false;
@@ -84,9 +100,10 @@
             // load2
             // 
             this.load2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.load2.Location = new System.Drawing.Point(339, 305);
+            this.load2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.load2.Location = new System.Drawing.Point(333, 305);
             this.load2.Name = "load2";
-            this.load2.Size = new System.Drawing.Size(109, 30);
+            this.load2.Size = new System.Drawing.Size(122, 42);
             this.load2.TabIndex = 4;
             this.load2.Text = "Carregar Imagem 2";
             this.load2.UseVisualStyleBackColor = false;
@@ -114,6 +131,7 @@
             // adicao
             // 
             this.adicao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.adicao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.adicao.Location = new System.Drawing.Point(554, 90);
             this.adicao.Name = "adicao";
             this.adicao.Size = new System.Drawing.Size(50, 45);
@@ -125,6 +143,7 @@
             // subtracao
             // 
             this.subtracao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.subtracao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.subtracao.Location = new System.Drawing.Point(554, 157);
             this.subtracao.Name = "subtracao";
             this.subtracao.Size = new System.Drawing.Size(50, 45);
@@ -136,6 +155,7 @@
             // multiplicacao
             // 
             this.multiplicacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.multiplicacao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.multiplicacao.Location = new System.Drawing.Point(554, 226);
             this.multiplicacao.Name = "multiplicacao";
             this.multiplicacao.Size = new System.Drawing.Size(50, 45);
@@ -147,6 +167,7 @@
             // divisao
             // 
             this.divisao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.divisao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.divisao.Location = new System.Drawing.Point(554, 288);
             this.divisao.Name = "divisao";
             this.divisao.Size = new System.Drawing.Size(50, 45);
@@ -204,6 +225,7 @@
             this.multiplicacaoInput.Name = "multiplicacaoInput";
             this.multiplicacaoInput.Size = new System.Drawing.Size(43, 20);
             this.multiplicacaoInput.TabIndex = 13;
+            this.multiplicacaoInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.multiplicacaoInput_KeyUp);
             // 
             // divisaoInput
             // 
@@ -211,21 +233,25 @@
             this.divisaoInput.Name = "divisaoInput";
             this.divisaoInput.Size = new System.Drawing.Size(43, 20);
             this.divisaoInput.TabIndex = 14;
+            this.divisaoInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.divisaoInput_KeyUp);
             // 
-            // button1
+            // rgbToGrey
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(38, 384);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 30);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "RGB -> GreyScale";
-            this.button1.UseVisualStyleBackColor = false;
+            this.rgbToGrey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.rgbToGrey.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.rgbToGrey.ForeColor = System.Drawing.Color.Black;
+            this.rgbToGrey.Location = new System.Drawing.Point(38, 384);
+            this.rgbToGrey.Name = "rgbToGrey";
+            this.rgbToGrey.Size = new System.Drawing.Size(129, 30);
+            this.rgbToGrey.TabIndex = 15;
+            this.rgbToGrey.Text = "RGB -> GreyScale";
+            this.rgbToGrey.UseVisualStyleBackColor = false;
+            this.rgbToGrey.Click += new System.EventHandler(this.rgbToGrey_Click);
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Location = new System.Drawing.Point(180, 384);
             this.button2.Name = "button2";
@@ -237,6 +263,7 @@
             // blending
             // 
             this.blending.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.blending.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.blending.ForeColor = System.Drawing.Color.Black;
             this.blending.Location = new System.Drawing.Point(321, 384);
             this.blending.Name = "blending";
@@ -256,6 +283,7 @@
             // btNOT
             // 
             this.btNOT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btNOT.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btNOT.Location = new System.Drawing.Point(705, 288);
             this.btNOT.Name = "btNOT";
             this.btNOT.Size = new System.Drawing.Size(50, 45);
@@ -267,6 +295,7 @@
             // btXOR
             // 
             this.btXOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btXOR.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btXOR.Location = new System.Drawing.Point(705, 226);
             this.btXOR.Name = "btXOR";
             this.btXOR.Size = new System.Drawing.Size(50, 45);
@@ -278,6 +307,7 @@
             // btOR
             // 
             this.btOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btOR.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btOR.Location = new System.Drawing.Point(705, 157);
             this.btOR.Name = "btOR";
             this.btOR.Size = new System.Drawing.Size(50, 45);
@@ -289,6 +319,7 @@
             // btAND
             // 
             this.btAND.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btAND.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btAND.Location = new System.Drawing.Point(705, 90);
             this.btAND.Name = "btAND";
             this.btAND.Size = new System.Drawing.Size(50, 45);
@@ -317,12 +348,106 @@
             this.label5.TabIndex = 24;
             this.label5.Text = "Lógicos";
             // 
-            // Form1
+            // save
+            // 
+            this.save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.save.Location = new System.Drawing.Point(844, 305);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(122, 42);
+            this.save.TabIndex = 25;
+            this.save.Text = "Salvar Resultado";
+            this.save.UseVisualStyleBackColor = false;
+            this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // historigrama
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.historigrama.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.historigrama.Legends.Add(legend3);
+            this.historigrama.Location = new System.Drawing.Point(27, 477);
+            this.historigrama.Name = "historigrama";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.historigrama.Series.Add(series3);
+            this.historigrama.Size = new System.Drawing.Size(459, 251);
+            this.historigrama.TabIndex = 28;
+            this.historigrama.Text = "chart1";
+            // 
+            // bright
+            // 
+            this.bright.LargeChange = 1;
+            this.bright.Location = new System.Drawing.Point(536, 384);
+            this.bright.Maximum = 25;
+            this.bright.Name = "bright";
+            this.bright.Size = new System.Drawing.Size(219, 45);
+            this.bright.TabIndex = 29;
+            this.bright.Value = 10;
+            this.bright.ValueChanged += new System.EventHandler(this.bright_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label6.Location = new System.Drawing.Point(541, 361);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 20);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Brilho:";
+            // 
+            // brightLabel
+            // 
+            this.brightLabel.AutoSize = true;
+            this.brightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.brightLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.brightLabel.Location = new System.Drawing.Point(591, 364);
+            this.brightLabel.Name = "brightLabel";
+            this.brightLabel.Size = new System.Drawing.Size(32, 17);
+            this.brightLabel.TabIndex = 31;
+            this.brightLabel.Text = "100";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label8.Location = new System.Drawing.Point(542, 416);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(13, 13);
+            this.label8.TabIndex = 32;
+            this.label8.Text = "0";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label9.Location = new System.Drawing.Point(733, 416);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "255";
+            // 
+            // brightnessLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1046, 530);
+            this.ClientSize = new System.Drawing.Size(1039, 749);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.brightLabel);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.bright);
+            this.Controls.Add(this.historigrama);
+            this.Controls.Add(this.save);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btNOT);
@@ -332,7 +457,7 @@
             this.Controls.Add(this.blendingFactor);
             this.Controls.Add(this.blending);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.rgbToGrey);
             this.Controls.Add(this.divisaoInput);
             this.Controls.Add(this.multiplicacaoInput);
             this.Controls.Add(this.label3);
@@ -347,11 +472,15 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.load1);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "Form1";
+            this.Name = "brightnessLabel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.historigrama)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bright)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,7 +504,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox multiplicacaoInput;
         private System.Windows.Forms.TextBox divisaoInput;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button rgbToGrey;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button blending;
         private System.Windows.Forms.TextBox blendingFactor;
@@ -385,6 +514,14 @@
         private System.Windows.Forms.Button btAND;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart historigrama;
+        private System.Windows.Forms.TrackBar bright;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label brightLabel;
+        private System.Windows.Forms.Label label6;
     }
 }
 
