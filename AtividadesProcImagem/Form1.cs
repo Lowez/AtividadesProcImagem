@@ -304,5 +304,156 @@ namespace AtividadesProcImagem
 
             pictureBox3.Image = divisImage;
         }
+
+        private void btNOT_Click(object sender, EventArgs e)
+        {
+            Bitmap notImage = (Bitmap)pictureBox1.Image;
+            int max = 255;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = max - (int)vImg1R[x, y];
+                    newR = newR <= 0 ? 0 : newR;
+                    int newG = max - (int)vImg1G[x, y];
+                    newG = newG <= 0 ? 0 : newG;
+                    int newB = max - (int)vImg1B[x, y];
+                    newB = newB <= 0 ? 0 : newB;
+                    int newA = max - (int)vImg1A[x, y];
+                    newA = newA <= 0 ? 0 : newA;
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    notImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = notImage;
+        }
+
+        private void btAND_Click(object sender, EventArgs e)
+        {
+            Bitmap andImage = (Bitmap)pictureBox1.Image;
+
+            int x, y;
+
+            for (x = 0; x < andImage.Width; x++)
+            {
+                for (y = 0; y < andImage.Height; y++)
+                {
+
+                    Color newColor = new Color();
+
+                    int newR = vImg1R[x, y] & vImg2R[x, y];
+
+                    int newG = vImg1G[x, y] & vImg2G[x, y];
+
+                    int newB = vImg1B[x, y] & vImg2B[x, y];
+
+                    int newA = vImg1A[x, y] & vImg2A[x, y];
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    andImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = andImage;
+        }
+
+        private void btOR_Click(object sender, EventArgs e)
+        {
+            Bitmap andImage = (Bitmap)pictureBox1.Image;
+
+            int x, y;
+
+            for (x = 0; x < andImage.Width; x++)
+            {
+                for (y = 0; y < andImage.Height; y++)
+                {
+
+                    Color newColor = new Color();
+
+                    int newR = vImg1R[x, y] | vImg2R[x, y];
+
+                    int newG = vImg1G[x, y] | vImg2G[x, y];
+
+                    int newB = vImg1B[x, y] | vImg2B[x, y];
+
+                    int newA = vImg1A[x, y] | vImg2A[x, y];
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    andImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = andImage;
+        }
+
+        private void btXOR_Click(object sender, EventArgs e)
+        {
+            Bitmap andImage = (Bitmap)pictureBox1.Image;
+
+            int x, y;
+
+            for (x = 0; x < andImage.Width; x++)
+            {
+                for (y = 0; y < andImage.Height; y++)
+                {
+
+                    Color newColor = new Color();
+
+                    int newR = vImg1R[x, y] ^ vImg2R[x, y];
+
+                    int newG = vImg1G[x, y] ^ vImg2G[x, y];
+
+                    int newB = vImg1B[x, y] ^ vImg2B[x, y];
+
+                    int newA = vImg1A[x, y] ^ vImg2A[x, y];
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    andImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = andImage;
+        }
+
+        private void blending_Click(object sender, EventArgs e)
+        {
+            Bitmap blendImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            double fator = 1.0;
+            if (blendingFactor.Text != "") fator = Convert.ToDouble(blendingFactor.Text);
+
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = (int)(fator * vImg1R[x, y] + (1 - fator) * vImg2R[x, y]);
+                    int newG = (int)(fator * vImg1G[x, y] + (1 - fator) * vImg2G[x, y]);
+                    int newB = (int)(fator * vImg1B[x, y] + (1 - fator) * vImg2B[x, y]);
+                    int newA = (int)(fator * vImg1A[x, y] + (1 - fator) * vImg2A[x, y]);
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    blendImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = blendImage;
+        }
     }
 }

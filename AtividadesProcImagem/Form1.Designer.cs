@@ -46,12 +46,12 @@
             this.divisaoInput = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.blending = new System.Windows.Forms.Button();
+            this.blendingFactor = new System.Windows.Forms.TextBox();
+            this.btNOT = new System.Windows.Forms.Button();
+            this.btXOR = new System.Windows.Forms.Button();
+            this.btOR = new System.Windows.Forms.Button();
+            this.btAND = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -234,63 +234,68 @@
             this.button2.Text = "GreyScale -> RGB";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // blending
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(321, 384);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(126, 30);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Blending";
-            this.button3.UseVisualStyleBackColor = false;
+            this.blending.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.blending.ForeColor = System.Drawing.Color.Black;
+            this.blending.Location = new System.Drawing.Point(321, 384);
+            this.blending.Name = "blending";
+            this.blending.Size = new System.Drawing.Size(126, 30);
+            this.blending.TabIndex = 17;
+            this.blending.Text = "Blending";
+            this.blending.UseVisualStyleBackColor = false;
+            this.blending.Click += new System.EventHandler(this.blending_Click);
             // 
-            // textBox1
+            // blendingFactor
             // 
-            this.textBox1.Location = new System.Drawing.Point(454, 390);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(43, 20);
-            this.textBox1.TabIndex = 18;
+            this.blendingFactor.Location = new System.Drawing.Point(454, 390);
+            this.blendingFactor.Name = "blendingFactor";
+            this.blendingFactor.Size = new System.Drawing.Size(43, 20);
+            this.blendingFactor.TabIndex = 18;
             // 
-            // button4
+            // btNOT
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button4.Location = new System.Drawing.Point(705, 288);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(50, 45);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "NOT";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btNOT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btNOT.Location = new System.Drawing.Point(705, 288);
+            this.btNOT.Name = "btNOT";
+            this.btNOT.Size = new System.Drawing.Size(50, 45);
+            this.btNOT.TabIndex = 22;
+            this.btNOT.Text = "NOT";
+            this.btNOT.UseVisualStyleBackColor = false;
+            this.btNOT.Click += new System.EventHandler(this.btNOT_Click);
             // 
-            // button5
+            // btXOR
             // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button5.Location = new System.Drawing.Point(705, 226);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(50, 45);
-            this.button5.TabIndex = 21;
-            this.button5.Text = "XOR";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btXOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btXOR.Location = new System.Drawing.Point(705, 226);
+            this.btXOR.Name = "btXOR";
+            this.btXOR.Size = new System.Drawing.Size(50, 45);
+            this.btXOR.TabIndex = 21;
+            this.btXOR.Text = "XOR";
+            this.btXOR.UseVisualStyleBackColor = false;
+            this.btXOR.Click += new System.EventHandler(this.btXOR_Click);
             // 
-            // button6
+            // btOR
             // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button6.Location = new System.Drawing.Point(705, 157);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(50, 45);
-            this.button6.TabIndex = 20;
-            this.button6.Text = "OR";
-            this.button6.UseVisualStyleBackColor = false;
+            this.btOR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btOR.Location = new System.Drawing.Point(705, 157);
+            this.btOR.Name = "btOR";
+            this.btOR.Size = new System.Drawing.Size(50, 45);
+            this.btOR.TabIndex = 20;
+            this.btOR.Text = "OR";
+            this.btOR.UseVisualStyleBackColor = false;
+            this.btOR.Click += new System.EventHandler(this.btOR_Click);
             // 
-            // button7
+            // btAND
             // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.button7.Location = new System.Drawing.Point(705, 90);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(50, 45);
-            this.button7.TabIndex = 19;
-            this.button7.Text = "AND";
-            this.button7.UseVisualStyleBackColor = false;
+            this.btAND.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btAND.Location = new System.Drawing.Point(705, 90);
+            this.btAND.Name = "btAND";
+            this.btAND.Size = new System.Drawing.Size(50, 45);
+            this.btAND.TabIndex = 19;
+            this.btAND.Text = "AND";
+            this.btAND.UseVisualStyleBackColor = false;
+            this.btAND.Click += new System.EventHandler(this.btAND_Click);
             // 
             // label4
             // 
@@ -320,12 +325,12 @@
             this.ClientSize = new System.Drawing.Size(1046, 530);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btNOT);
+            this.Controls.Add(this.btXOR);
+            this.Controls.Add(this.btOR);
+            this.Controls.Add(this.btAND);
+            this.Controls.Add(this.blendingFactor);
+            this.Controls.Add(this.blending);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.divisaoInput);
@@ -372,12 +377,12 @@
         private System.Windows.Forms.TextBox divisaoInput;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button blending;
+        private System.Windows.Forms.TextBox blendingFactor;
+        private System.Windows.Forms.Button btNOT;
+        private System.Windows.Forms.Button btXOR;
+        private System.Windows.Forms.Button btOR;
+        private System.Windows.Forms.Button btAND;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
     }
