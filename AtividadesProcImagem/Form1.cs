@@ -183,7 +183,7 @@ namespace AtividadesProcImagem
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
 
-            if (Convert.ToInt32(bright.Value) != 10)
+            if (Convert.ToInt32(bright.Value) != 0)
             {
                 int fator = (Convert.ToInt32(bright.Value) * 10);
 
@@ -246,7 +246,7 @@ namespace AtividadesProcImagem
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
 
-            if (Convert.ToInt32(bright.Value) != 10)
+            if (Convert.ToInt32(bright.Value) != 0)
             {
                 int fator = (Convert.ToInt32(bright.Value) * 10);
 
@@ -568,7 +568,85 @@ namespace AtividadesProcImagem
 
         private void rgbToGrey_Click(object sender, EventArgs e)
         {
+            Bitmap rgbToGreyImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
 
+            int x, y;
+
+            for (x = 0; x < image1.Width; x++)
+            {
+                for (y = 0; y < image1.Height; y++)
+                {
+
+                    Color newColor = new Color();
+                    int newR = (vImg1R[x, y] >= 128) ? 1 : 0;
+                    int newG = (vImg1G[x, y] >= 128) ? 1 : 0;
+                    int newB = (vImg1B[x, y] >= 128) ? 1 : 0;
+                    int newA = (vImg1A[x, y] >= 128) ? 1 : 0;
+
+                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
+
+                    rgbToGreyImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            pictureBox3.Image = rgbToGreyImage;
+        }
+
+        private void btAplicarMelhoria_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void filtroMax()
+        {
+            Bitmap maxImage = (Bitmap)pictureBox1.Image;
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+
+            for (int i = 1; i < image1.Height - 2; i++) { 
+                for (int j = 1; j < image1.Width - 2; j++)
+                {
+                    byte[] mask = new byte[9];
+
+                    for (int k = 0; k < 9; k++)
+                    {
+                        mask[i] = (byte)(mask[0] + vImg1Gray[i - 1, j - 1]);
+                    }
+
+
+                    
+                }
+            }
+
+            
+        }
+
+        private void filtroMin()
+        {
+
+        }
+
+        private void filtroMean()
+        {
+
+        }
+
+        private void btAplicarFiltros_Click(object sender, EventArgs e)
+        {
+            if (cbFiltros.SelectedIndex != -1)
+            {
+                int filtroSelecionado = cbFiltros.SelectedIndex;
+
+                switch (filtroSelecionado)
+                {
+                    case 0:
+                        filtroMax(); break;
+                    case 1:
+                        filtroMin(); break;
+                    case 2:
+                        filtroMean(); break;
+                }
+            }
         }
     }
 }

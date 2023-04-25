@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.load1 = new System.Windows.Forms.Button();
             this.load2 = new System.Windows.Forms.Button();
@@ -66,6 +66,13 @@
             this.brightLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbMelhorias = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btAplicarMelhoria = new System.Windows.Forms.Button();
+            this.btAplicarFiltros = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cbFiltros = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -366,16 +373,16 @@
             // 
             // historigrama
             // 
-            chartArea3.Name = "ChartArea1";
-            this.historigrama.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.historigrama.Legends.Add(legend3);
-            this.historigrama.Location = new System.Drawing.Point(27, 477);
+            chartArea1.Name = "ChartArea1";
+            this.historigrama.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.historigrama.Legends.Add(legend1);
+            this.historigrama.Location = new System.Drawing.Point(38, 486);
             this.historigrama.Name = "historigrama";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.historigrama.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.historigrama.Series.Add(series1);
             this.historigrama.Size = new System.Drawing.Size(459, 251);
             this.historigrama.TabIndex = 28;
             this.historigrama.Text = "chart1";
@@ -383,12 +390,11 @@
             // bright
             // 
             this.bright.LargeChange = 1;
-            this.bright.Location = new System.Drawing.Point(536, 384);
+            this.bright.Location = new System.Drawing.Point(545, 384);
             this.bright.Maximum = 25;
             this.bright.Name = "bright";
             this.bright.Size = new System.Drawing.Size(219, 45);
             this.bright.TabIndex = 29;
-            this.bright.Value = 10;
             this.bright.ValueChanged += new System.EventHandler(this.bright_ValueChanged);
             // 
             // label6
@@ -396,28 +402,28 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label6.Location = new System.Drawing.Point(541, 361);
+            this.label6.Location = new System.Drawing.Point(550, 361);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 20);
+            this.label6.Size = new System.Drawing.Size(161, 20);
             this.label6.TabIndex = 30;
-            this.label6.Text = "Brilho:";
+            this.label6.Text = "Modificador de Brilho:";
             // 
             // brightLabel
             // 
             this.brightLabel.AutoSize = true;
             this.brightLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.brightLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.brightLabel.Location = new System.Drawing.Point(591, 364);
+            this.brightLabel.Location = new System.Drawing.Point(717, 364);
             this.brightLabel.Name = "brightLabel";
-            this.brightLabel.Size = new System.Drawing.Size(32, 17);
+            this.brightLabel.Size = new System.Drawing.Size(16, 17);
             this.brightLabel.TabIndex = 31;
-            this.brightLabel.Text = "100";
+            this.brightLabel.Text = "0";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label8.Location = new System.Drawing.Point(542, 416);
+            this.label8.Location = new System.Drawing.Point(551, 416);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(13, 13);
             this.label8.TabIndex = 32;
@@ -427,11 +433,92 @@
             // 
             this.label9.AutoSize = true;
             this.label9.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label9.Location = new System.Drawing.Point(733, 416);
+            this.label9.Location = new System.Drawing.Point(739, 416);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(25, 13);
             this.label9.TabIndex = 33;
             this.label9.Text = "255";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label7.Location = new System.Drawing.Point(48, 441);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(136, 29);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "Histograma";
+            // 
+            // cbMelhorias
+            // 
+            this.cbMelhorias.FormattingEnabled = true;
+            this.cbMelhorias.Items.AddRange(new object[] {
+            "SDBIS",
+            "Negativo",
+            "Equalização de Histograma"});
+            this.cbMelhorias.Location = new System.Drawing.Point(554, 486);
+            this.cbMelhorias.Name = "cbMelhorias";
+            this.cbMelhorias.Size = new System.Drawing.Size(141, 21);
+            this.cbMelhorias.TabIndex = 35;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label10.Location = new System.Drawing.Point(550, 450);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(165, 20);
+            this.label10.TabIndex = 36;
+            this.label10.Text = "Melhorias de Imagem:";
+            // 
+            // btAplicarMelhoria
+            // 
+            this.btAplicarMelhoria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btAplicarMelhoria.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btAplicarMelhoria.Location = new System.Drawing.Point(701, 486);
+            this.btAplicarMelhoria.Name = "btAplicarMelhoria";
+            this.btAplicarMelhoria.Size = new System.Drawing.Size(54, 21);
+            this.btAplicarMelhoria.TabIndex = 37;
+            this.btAplicarMelhoria.Text = "Aplicar";
+            this.btAplicarMelhoria.UseVisualStyleBackColor = false;
+            this.btAplicarMelhoria.Click += new System.EventHandler(this.btAplicarMelhoria_Click);
+            // 
+            // btAplicarFiltros
+            // 
+            this.btAplicarFiltros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btAplicarFiltros.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btAplicarFiltros.Location = new System.Drawing.Point(701, 579);
+            this.btAplicarFiltros.Name = "btAplicarFiltros";
+            this.btAplicarFiltros.Size = new System.Drawing.Size(54, 21);
+            this.btAplicarFiltros.TabIndex = 40;
+            this.btAplicarFiltros.Text = "Aplicar";
+            this.btAplicarFiltros.UseVisualStyleBackColor = false;
+            this.btAplicarFiltros.Click += new System.EventHandler(this.btAplicarFiltros_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label11.Location = new System.Drawing.Point(550, 543);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(91, 20);
+            this.label11.TabIndex = 39;
+            this.label11.Text = "Filtros(3x3):";
+            // 
+            // cbFiltros
+            // 
+            this.cbFiltros.FormattingEnabled = true;
+            this.cbFiltros.Items.AddRange(new object[] {
+            "Min",
+            "Max",
+            "Mean(Media)"});
+            this.cbFiltros.Location = new System.Drawing.Point(554, 579);
+            this.cbFiltros.Name = "cbFiltros";
+            this.cbFiltros.Size = new System.Drawing.Size(141, 21);
+            this.cbFiltros.TabIndex = 38;
             // 
             // brightnessLabel
             // 
@@ -441,6 +528,13 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1039, 749);
+            this.Controls.Add(this.btAplicarFiltros);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.cbFiltros);
+            this.Controls.Add(this.btAplicarMelhoria);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.cbMelhorias);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.brightLabel);
@@ -522,6 +616,13 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label brightLabel;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btAplicarMelhoria;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbMelhorias;
+        private System.Windows.Forms.Button btAplicarFiltros;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cbFiltros;
     }
 }
 
