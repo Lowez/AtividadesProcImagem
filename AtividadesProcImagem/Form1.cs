@@ -634,7 +634,7 @@ namespace AtividadesProcImagem
 
         private void applySDBIS(Bitmap image1)
         {
-
+            // To do
         }
 
         private void applyNegativo(Bitmap image1)
@@ -674,7 +674,7 @@ namespace AtividadesProcImagem
 
             Bitmap image3 = new Bitmap(image1.Width, image1.Height);
 
-            
+            // To do
         }
 
         private void btAplicarMelhoria_Click(object sender, EventArgs e)
@@ -977,7 +977,7 @@ namespace AtividadesProcImagem
             {
                 for (int j = 0; j < image1.Height; j++)
                 {
-
+                    // To do
                 }
             }
         }
