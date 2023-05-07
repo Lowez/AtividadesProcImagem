@@ -568,83 +568,416 @@ namespace AtividadesProcImagem
 
         private void rgbToGrey_Click(object sender, EventArgs e)
         {
-            Bitmap rgbToGreyImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
+            Bitmap image2 = (Bitmap)pictureBox2.Image;
 
-            int x, y;
-
-            for (x = 0; x < image1.Width; x++)
+            if (image1 == null || image2 == null)
             {
-                for (y = 0; y < image1.Height; y++)
-                {
-
-                    Color newColor = new Color();
-                    int newR = (vImg1R[x, y] >= 128) ? 1 : 0;
-                    int newG = (vImg1G[x, y] >= 128) ? 1 : 0;
-                    int newB = (vImg1B[x, y] >= 128) ? 1 : 0;
-                    int newA = (vImg1A[x, y] >= 128) ? 1 : 0;
-
-                    newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
-
-                    rgbToGreyImage.SetPixel(x, y, newColor);
-                }
+                MessageBox.Show("Selecione duas imagens.");
+                return;
             }
 
-            pictureBox3.Image = rgbToGreyImage;
-        }
+            if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+            {
+                MessageBox.Show("As imagens devem ter o mesmo tamanho e formato.");
+            }
 
-        private void btAplicarMelhoria_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void filtroMax()
-        {
-            Bitmap maxImage = (Bitmap)pictureBox1.Image;
-            Bitmap image1 = (Bitmap)pictureBox1.Image;
-
-            for (int i = 1; i < image1.Height - 2; i++) { 
-                for (int j = 1; j < image1.Width - 2; j++)
+            for (int i = 0; i < image1.Width; i++)
+            {
+                for (int j = 0; j < image1.Height; j++)
                 {
-                    byte[] mask = new byte[9];
-
-                    for (int k = 0; k < 9; k++)
+                    if (image1 != null)
                     {
-                        mask[i] = (byte)(mask[0] + vImg1Gray[i - 1, j - 1]);
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        //1bit
+                        if (grey >= 128) grey = 255;
+                        else if (grey < 128) grey = 0;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
                     }
 
+                    if (image2 != null)
+                    {
 
-                    
+                        //Greyscale
+                        int grey = (vImg2R[i, j] + vImg2G[i, j] + vImg2B[i, j]) / 3;
+
+                        //1bit
+                        if (grey >= 128) grey = 255;
+                        else if (grey < 128) grey = 0;
+
+                        vImg2R[i, j] = (byte)grey;
+                        vImg2G[i, j] = (byte)grey;
+                        vImg2B[i, j] = (byte)grey;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+
+
+                        image2.SetPixel(i, j, p);
+                    }
                 }
             }
+
+            pictureBox1.Image = image1;
+            pictureBox2.Image = image2;
+        }
+
+        private void applySDBIS(Bitmap image1)
+        {
+
+        }
+
+        private void applyNegativo(Bitmap image1)
+        {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem no primeiro campo");
+                return;
+            }
+
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
+
+            for (int i = 0; i < image1.Width; i++)
+            {
+                for (int j = 0; j < image1.Height; j++)
+                {
+                    Color cor1 = ((Bitmap)image1).GetPixel(i, j);
+                    int novoR = 255 - Math.Min(255, Math.Max(0, cor1.R + cor1.R));
+                    int novoG = 255 - Math.Min(255, Math.Max(0, cor1.G + cor1.G));
+                    int novoB = 255 - Math.Min(255, Math.Max(0, cor1.B + cor1.B));
+
+                    Color novaCor = Color.FromArgb(novoR, novoG, novoB);
+                    image3.SetPixel(i, j, novaCor);
+                }
+            }
+
+            pictureBox3.Image = image3;
+        }
+
+        private void applyEqualizacao(Bitmap image1)
+        {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
+            }
+
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
 
             
         }
 
-        private void filtroMin()
+        private void btAplicarMelhoria_Click(object sender, EventArgs e)
         {
+            String SDBIS = "SDBIS";
+            String Negativo = "Negativo";
+            String Equalizacao = "Equalização de Histograma";
 
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+
+            if (cbMelhorias.SelectedIndex != -1)
+            {
+                if (cbMelhorias.Text == SDBIS)
+                {
+                    applySDBIS(image1);
+                }
+                else if (cbMelhorias.Text == Negativo)
+                {
+                    applyNegativo(image1);
+                }
+                else if (cbMelhorias.Text == Equalizacao)
+                {
+                    applyEqualizacao(image1);
+                }
+            }
         }
 
-        private void filtroMean()
+        private void filtroMax(Bitmap image1)
         {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
+            }
 
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
+
+            for (int i = 1; i < image1.Width - 1; i++)
+            {
+                for (int j = 1; j < image1.Height - 1; j++)
+                {
+
+                    if (image1 != null)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
+                    }
+
+                    byte[] mask = new byte[9];
+                    for (int w = 0; w < mask.Length; w++)
+                        mask[w] = 1;
+
+                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
+                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
+                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
+
+                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
+                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
+                    mask[5] = (byte)(mask[5] * vImg1Gray[i, j + 1]);
+
+                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j - 1]);
+                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
+                    mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
+
+
+                    byte max = mask.Max();
+                    Color p2 = Color.FromArgb(max, max, max);
+
+                    image3.SetPixel(i, j, p2);
+                }
+            }
+
+            pictureBox3.Image = image3;
+        }
+
+        private void filtroMin(Bitmap image1)
+        {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
+            }
+
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
+
+            for (int i = 1; i < image1.Width - 1; i++)
+            {
+                for (int j = 1; j < image1.Height - 1; j++)
+                {
+
+                    if (image1 != null)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
+                    }
+
+                    byte[] mask = new byte[9];
+                    for (int w = 0; w < mask.Length; w++)
+                        mask[w] = 1;
+
+                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
+                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
+                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
+
+                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
+                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
+                    mask[5] = (byte)(mask[5] * vImg1Gray[i, j + 1]);
+
+                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j - 1]);
+                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
+                    mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
+
+
+                    byte min = mask.Min();
+                    Color p2 = Color.FromArgb(min, min, min);
+
+                    image3.SetPixel(i, j, p2);
+                }
+            }
+
+            pictureBox3.Image = image3;
+        }
+
+        private void filtroMean(Bitmap image1)
+        {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
+            }
+
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
+
+            for (int i = 1; i < image1.Width - 1; i++)
+            {
+                for (int j = 1; j < image1.Height - 1; j++)
+                {
+
+                    if (image1 != null)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
+                    }
+
+                    byte[] mask = new byte[9];
+                    for (int w = 0; w < mask.Length; w++)
+                        mask[w] = 1;
+
+                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
+                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
+                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
+
+                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
+                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
+                    mask[5] = (byte)(mask[5] * vImg1Gray[i, j + 1]);
+
+                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j - 1]);
+                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
+                    mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
+
+                    int acc = 0;
+                    for (int k = 0; k < mask.Length; k++)
+                    {
+                        acc += mask[k];
+                    }
+
+                    byte mean = (byte)(acc / 9);
+
+                    Color p2 = Color.FromArgb(mean, mean, mean);
+
+                    image3.SetPixel(i, j, p2);
+                }
+            }
+
+            pictureBox3.Image = image3;
         }
 
         private void btAplicarFiltros_Click(object sender, EventArgs e)
         {
+            String max = "Max";
+            String min = "Min";
+            String media = "Mean(Media)";
+
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+
             if (cbFiltros.SelectedIndex != -1)
             {
-                int filtroSelecionado = cbFiltros.SelectedIndex;
-
-                switch (filtroSelecionado)
+                if (cbFiltros.Text == max)
                 {
-                    case 0:
-                        filtroMax(); break;
-                    case 1:
-                        filtroMin(); break;
-                    case 2:
-                        filtroMean(); break;
+                    filtroMax(image1);
+                }
+                else if (cbFiltros.Text == min)
+                {
+                    filtroMin(image1);
+                }
+                else if (cbFiltros.Text == media)
+                {
+                    filtroMean(image1);
+                }
+            }
+        }
+
+        private void btRBGto8bits_Click(object sender, EventArgs e)
+        {
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            Bitmap image2 = (Bitmap)pictureBox2.Image;
+
+            if (image1 == null || image2 == null)
+            {
+                MessageBox.Show("Selecione duas imagens.");
+                return;
+            }
+
+            if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+            {
+                MessageBox.Show("As imagens devem ter o mesmo tamanho e formato.");
+            }
+
+            for (int i = 0; i < image1.Width; i++)
+            {
+                for (int j = 0; j < image1.Height; j++)
+                {
+                    if (image1 != null)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
+                    }
+
+                    if (image2 != null)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg2R[i, j] + vImg2G[i, j] + vImg2B[i, j]) / 3; ;
+
+                        vImg2R[i, j] = (byte)grey;
+                        vImg2G[i, j] = (byte)grey;
+                        vImg2B[i, j] = (byte)grey;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+
+
+                        image2.SetPixel(i, j, p);
+                    }
+                }
+            }
+
+            pictureBox1.Image = image1;
+            pictureBox2.Image = image2;
+        }
+
+        private void btToDouble_Click(object sender, EventArgs e)
+        {
+            Bitmap image1 = (Bitmap)pictureBox1.Image;
+            Bitmap image2 = (Bitmap)pictureBox2.Image;
+
+            if (image1 == null || image2 == null)
+            {
+                MessageBox.Show("Selecione duas imagens.");
+                return;
+            }
+
+            for (int i = 0; i < image1.Width; i++)
+            {
+                for (int j = 0; j < image1.Height; j++)
+                {
+
                 }
             }
         }

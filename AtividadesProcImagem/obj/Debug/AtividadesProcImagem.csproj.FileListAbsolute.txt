@@ -13,10 +13,10 @@ D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\Atividade
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\bin\Debug\AtividadesProcImagem.pdb
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.csproj.AssemblyReference.cache
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.csproj.SuggestedBindingRedirects.cache
-D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.Form1.resources
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.Properties.Resources.resources
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.csproj.GenerateResource.cache
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.csproj.CoreCompileInputs.cache
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.exe
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.pdb
 D:\my\proc_img\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.brightnessLabel.resources
+D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.brightnessLabel.resources
