@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace AtividadesProcImagem
 {
@@ -674,7 +675,67 @@ namespace AtividadesProcImagem
 
             Bitmap image3 = new Bitmap(image1.Width, image1.Height);
 
-            // To do
+            int width = image1.Width;
+            int height = image1.Height;
+
+            int[] pixelIntensityRate = new int[256];
+
+            for (int i = 0; i < width; i++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    //A imagem deve ser em greyscale, portanto, qualquer pixel vale
+                    int pixelVal = image1.GetPixel(i, y).R;
+                    pixelIntensityRate[pixelVal]++;
+                }
+            }
+
+            double[] CFD = new double[256];
+            int pixelsCount = width * width;
+            CFD[0] = pixelIntensityRate[0] / (double)pixelsCount;
+            for (int i = 1; i < 256; i++)
+            {
+                CFD[i] = CFD[i - 1] + pixelIntensityRate[i] / (double)pixelsCount;
+            }
+
+
+            byte[,] finalImg = new byte[width, height];
+
+            int[] finalPixelRate = new int[256];
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    int pixel = vImg1Gray[i, j];
+                    finalImg[i, j] = (byte)Math.Round(CFD[pixel] * 255.0);
+                    finalPixelRate[finalImg[i, j]]++;
+                }
+            }
+
+            histogramaOriginal.Series.Clear();
+            histogramaOriginal.Series.Add("Histograma A");
+            histogramaOriginal.Series["Histograma A"].ChartType = SeriesChartType.Column;
+            histogramaOriginal.Series["Histograma A"].Points.DataBindY(pixelIntensityRate);
+            histogramaOriginal.ChartAreas[0].AxisY.Maximum = pixelIntensityRate.Max() + 10;
+
+            histogramaEqualizado.Series.Clear();
+            histogramaEqualizado.Series.Add("Resultado");
+            histogramaEqualizado.Series["Resultado"].ChartType = SeriesChartType.Column;
+            histogramaEqualizado.Series["Resultado"].Points.DataBindY(finalPixelRate);
+            histogramaEqualizado.ChartAreas[0].AxisY.Maximum = finalPixelRate.Max() + 10;
+
+            for (int i = 0; i < image3.Width; i++)
+            {
+                for (int j = 0; j < image3.Height; j++)
+                {
+                    byte color = finalImg[i, j];
+                    Color p = Color.FromArgb(255, color, color, color);
+
+                    image3.SetPixel(i, j, p);
+                }
+            }
+
+            pictureBox3.Image = image3;
         }
 
         private void btAplicarMelhoria_Click(object sender, EventArgs e)
