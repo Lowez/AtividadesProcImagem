@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.load1 = new System.Windows.Forms.Button();
             this.load2 = new System.Windows.Forms.Button();
@@ -79,6 +79,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.histogramaEqualizado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btToDouble = new System.Windows.Forms.Button();
+            this.btReset = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -280,7 +281,7 @@
             this.blending.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.blending.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.blending.ForeColor = System.Drawing.Color.Black;
-            this.blending.Location = new System.Drawing.Point(321, 384);
+            this.blending.Location = new System.Drawing.Point(182, 384);
             this.blending.Name = "blending";
             this.blending.Size = new System.Drawing.Size(126, 30);
             this.blending.TabIndex = 17;
@@ -290,7 +291,7 @@
             // 
             // blendingFactor
             // 
-            this.blendingFactor.Location = new System.Drawing.Point(454, 390);
+            this.blendingFactor.Location = new System.Drawing.Point(315, 390);
             this.blendingFactor.Name = "blendingFactor";
             this.blendingFactor.Size = new System.Drawing.Size(43, 20);
             this.blendingFactor.TabIndex = 18;
@@ -381,17 +382,17 @@
             // 
             // histogramaOriginal
             // 
-            chartArea2.Name = "ChartArea1";
-            this.histogramaOriginal.ChartAreas.Add(chartArea2);
+            chartArea4.Name = "ChartArea1";
+            this.histogramaOriginal.ChartAreas.Add(chartArea4);
             this.histogramaOriginal.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            legend2.Name = "Legend1";
-            this.histogramaOriginal.Legends.Add(legend2);
+            legend4.Name = "Legend1";
+            this.histogramaOriginal.Legends.Add(legend4);
             this.histogramaOriginal.Location = new System.Drawing.Point(38, 554);
             this.histogramaOriginal.Name = "histogramaOriginal";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.histogramaOriginal.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.histogramaOriginal.Series.Add(series4);
             this.histogramaOriginal.Size = new System.Drawing.Size(459, 251);
             this.histogramaOriginal.TabIndex = 28;
             this.histogramaOriginal.Text = "chart1";
@@ -542,16 +543,16 @@
             // 
             // histogramaEqualizado
             // 
-            chartArea1.Name = "ChartArea1";
-            this.histogramaEqualizado.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.histogramaEqualizado.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.histogramaEqualizado.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.histogramaEqualizado.Legends.Add(legend3);
             this.histogramaEqualizado.Location = new System.Drawing.Point(863, 554);
             this.histogramaEqualizado.Name = "histogramaEqualizado";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.histogramaEqualizado.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.histogramaEqualizado.Series.Add(series3);
             this.histogramaEqualizado.Size = new System.Drawing.Size(459, 251);
             this.histogramaEqualizado.TabIndex = 41;
             this.histogramaEqualizado.Text = "chart1";
@@ -561,13 +562,27 @@
             this.btToDouble.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btToDouble.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btToDouble.ForeColor = System.Drawing.Color.Black;
-            this.btToDouble.Location = new System.Drawing.Point(180, 384);
+            this.btToDouble.Location = new System.Drawing.Point(326, 435);
             this.btToDouble.Name = "btToDouble";
             this.btToDouble.Size = new System.Drawing.Size(128, 30);
             this.btToDouble.TabIndex = 43;
             this.btToDouble.Text = "toDouble";
             this.btToDouble.UseVisualStyleBackColor = false;
+            this.btToDouble.Visible = false;
             this.btToDouble.Click += new System.EventHandler(this.btToDouble_Click);
+            // 
+            // btReset
+            // 
+            this.btReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btReset.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btReset.ForeColor = System.Drawing.Color.Black;
+            this.btReset.Location = new System.Drawing.Point(182, 435);
+            this.btReset.Name = "btReset";
+            this.btReset.Size = new System.Drawing.Size(128, 30);
+            this.btReset.TabIndex = 44;
+            this.btReset.Text = "Reset";
+            this.btReset.UseVisualStyleBackColor = false;
+            this.btReset.Click += new System.EventHandler(this.btReset_Click);
             // 
             // brightnessLabel
             // 
@@ -576,7 +591,8 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1359, 836);
+            this.ClientSize = new System.Drawing.Size(1359, 749);
+            this.Controls.Add(this.btReset);
             this.Controls.Add(this.btToDouble);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.histogramaEqualizado);
@@ -621,6 +637,7 @@
             this.Name = "brightnessLabel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -679,6 +696,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DataVisualization.Charting.Chart histogramaEqualizado;
         private System.Windows.Forms.Button btToDouble;
+        private System.Windows.Forms.Button btReset;
     }
 }
 

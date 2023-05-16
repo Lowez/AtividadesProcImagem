@@ -36,7 +36,71 @@ namespace AtividadesProcImagem
         byte[,] vImg2B;
         byte[,] vImg2A;
 
+        Bitmap img1Origin;
+        byte[,] vImg1GrayOrigin;
+        byte[,] vImg1ROrigin;
+        byte[,] vImg1GOrigin;
+        byte[,] vImg1BOrigin;
+        byte[,] vImg1AOrigin;
+
+        Bitmap img2Origin;
+        byte[,] vImg2GrayOrigin;
+        byte[,] vImg2ROrigin;
+        byte[,] vImg2GOrigin;
+        byte[,] vImg2BOrigin;
+        byte[,] vImg2AOrigin;
+
         int resultIndex = 0;
+
+        private bool checkDimensions(Bitmap img1, Bitmap img2)
+        {
+            int size1 = img1.Width + img1.Height;
+            int size2 = img2.Width + img2.Height;
+
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show(
+                    "As dimensões devem ser iguais para as duas imagens!",
+                    "Dimensões diferentes detectadas!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                return false;
+
+            }
+
+            return true;
+        }
+
+        private bool checkExistance(String image2 = "notneeded") {
+            
+            if (img1 == null)
+            {
+                MessageBox.Show(
+                    "Deve existir ao menos a imagem 1 para essa função!",
+                    "Imagem faltando!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                return false;
+            }
+
+            if (image2 == "needed" && img2 == null)
+            {
+                MessageBox.Show(
+                    "Devem existir a imagem 1 e 2 para essa função!",
+                    "Imagens faltando!",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                return false;
+            }
+
+            return true;
+        }
 
         private void load1_Click_1(object sender, EventArgs e)
         {
@@ -59,6 +123,7 @@ namespace AtividadesProcImagem
                 try
                 {
                     img1 = new Bitmap(filePath);
+                    img1Origin = new Bitmap(filePath);
                     bLoadImgOK = true;
                 }
                 catch (Exception ex)
@@ -78,6 +143,12 @@ namespace AtividadesProcImagem
                     vImg1B = new byte[img1.Width, img1.Height];
                     vImg1A = new byte[img1.Width, img1.Height];
 
+                    vImg1GrayOrigin = new byte[img1Origin.Width, img1Origin.Height];
+                    vImg1ROrigin = new byte[img1Origin.Width, img1Origin.Height];
+                    vImg1GOrigin = new byte[img1Origin.Width, img1Origin.Height];
+                    vImg1BOrigin = new byte[img1Origin.Width, img1Origin.Height];
+                    vImg1AOrigin = new byte[img1Origin.Width, img1Origin.Height];
+
                     // Percorre todos os pixels da imagem...
                     for (int i = 0; i < img1.Width; i++)
                     {
@@ -89,6 +160,7 @@ namespace AtividadesProcImagem
                             //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
                             byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
                             vImg1Gray[i, j] = pixelIntensity;
+                            vImg1GrayOrigin[i, j] = pixelIntensity;
 
                             // Para imagens RGB, extrair o valor do pixel com...
                             byte R = pixel.R;
@@ -100,6 +172,11 @@ namespace AtividadesProcImagem
                             vImg1G[i, j] = G;
                             vImg1B[i, j] = B;
                             vImg1A[i, j] = A;
+
+                            vImg1ROrigin[i, j] = R;
+                            vImg1GOrigin[i, j] = G;
+                            vImg1BOrigin[i, j] = B;
+                            vImg1AOrigin[i, j] = A;
 
                         }
                     }
@@ -129,6 +206,7 @@ namespace AtividadesProcImagem
                 try
                 {
                     img2 = new Bitmap(filePath);
+                    img2Origin = new Bitmap(filePath);
                     bLoadImgOK = true;
                 }
                 catch (Exception ex)
@@ -148,6 +226,12 @@ namespace AtividadesProcImagem
                     vImg2B = new byte[img2.Width, img2.Height];
                     vImg2A = new byte[img2.Width, img2.Height];
 
+                    vImg2GrayOrigin = new byte[img2Origin.Width, img2Origin.Height];
+                    vImg2ROrigin = new byte[img2Origin.Width, img2Origin.Height];
+                    vImg2GOrigin = new byte[img2Origin.Width, img2Origin.Height];
+                    vImg2BOrigin = new byte[img2Origin.Width, img2Origin.Height];
+                    vImg2AOrigin = new byte[img2Origin.Width, img2Origin.Height];
+
                     // Percorre todos os pixels da imagem...
                     for (int i = 0; i < img2.Width; i++)
                     {
@@ -159,6 +243,7 @@ namespace AtividadesProcImagem
                             //byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
                             byte pixelIntensity = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
                             vImg2Gray[i, j] = pixelIntensity;
+                            vImg2GrayOrigin[i, j] = pixelIntensity;
 
                             // Para imagens RGB, extrair o valor do pixel com...
                             byte R = pixel.R;
@@ -170,6 +255,11 @@ namespace AtividadesProcImagem
                             vImg2G[i, j] = G;
                             vImg2B[i, j] = B;
                             vImg2A[i, j] = A;
+
+                            vImg2ROrigin[i, j] = R;
+                            vImg2GOrigin[i, j] = G;
+                            vImg2BOrigin[i, j] = B;
+                            vImg2AOrigin[i, j] = A;
 
                         }
                     }
@@ -184,8 +274,11 @@ namespace AtividadesProcImagem
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
 
+            if (checkExistance() == false) { return; }
+
             if (Convert.ToInt32(bright.Value) != 0)
             {
+
                 int fator = (Convert.ToInt32(bright.Value) * 10);
 
                 int x, y;
@@ -212,8 +305,11 @@ namespace AtividadesProcImagem
                 }
 
                 pictureBox3.Image = addImage;
-            } else
+            }
+            else
             {
+                if (checkDimensions(image1, image2) == false) { return; }
+
                 int x, y;
 
                 for (x = 0; x < image1.Width; x++)
@@ -246,9 +342,13 @@ namespace AtividadesProcImagem
             Bitmap subtImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
+            
+            if (checkExistance() == false) { return; }
 
-            if (Convert.ToInt32(bright.Value) != 0)
+                if (Convert.ToInt32(bright.Value) != 0)
             {
+                if (checkExistance() == false) { return; }
+
                 int fator = (Convert.ToInt32(bright.Value) * 10);
 
                 int x, y;
@@ -278,6 +378,8 @@ namespace AtividadesProcImagem
             }
             else
             {
+                if (checkDimensions(image1, image2) == false) { return; }
+
                 int x, y;
 
                 for (x = 0; x < image1.Width; x++)
@@ -310,6 +412,9 @@ namespace AtividadesProcImagem
             Bitmap multiImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             double fator = 1.0;
+
+            if (checkExistance() == false) { return; }
+
             if (multiplicacaoInput.Text != "") fator = Convert.ToDouble(multiplicacaoInput.Text);
 
             int x, y;
@@ -343,6 +448,9 @@ namespace AtividadesProcImagem
             Bitmap divisImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             double fator = 1.0;
+
+            if (checkExistance() == false) { return; }
+
             if (divisaoInput.Text != "") fator = Convert.ToDouble(divisaoInput.Text);
 
             int x, y;
@@ -377,6 +485,8 @@ namespace AtividadesProcImagem
             int max = 255;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
 
+            if (checkExistance() == false) { return; }
+
             int x, y;
 
             for (x = 0; x < image1.Width; x++)
@@ -409,6 +519,10 @@ namespace AtividadesProcImagem
 
             int x, y;
 
+            if (checkExistance("needed") == false) { return; }
+
+            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
+
             for (x = 0; x < andImage.Width; x++)
             {
                 for (y = 0; y < andImage.Height; y++)
@@ -436,6 +550,10 @@ namespace AtividadesProcImagem
         private void btOR_Click(object sender, EventArgs e)
         {
             Bitmap andImage = (Bitmap)pictureBox1.Image;
+
+            if (checkExistance("needed") == false) { return; }
+
+            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
 
             int x, y;
 
@@ -466,6 +584,10 @@ namespace AtividadesProcImagem
         private void btXOR_Click(object sender, EventArgs e)
         {
             Bitmap andImage = (Bitmap)pictureBox1.Image;
+
+            if (checkExistance("needed") == false) { return; }
+
+            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
 
             int x, y;
 
@@ -498,6 +620,9 @@ namespace AtividadesProcImagem
             Bitmap blendImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             double fator = 1.0;
+
+            if (checkDimensions(image1, img2Origin) == false) { return; }
+
             if (blendingFactor.Text != "") fator = Convert.ToDouble(blendingFactor.Text);
 
             int x, y;
@@ -1041,6 +1166,24 @@ namespace AtividadesProcImagem
                     // To do
                 }
             }
+        }
+
+        private void btReset_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image = img1Origin;
+            }
+
+            if (pictureBox2.Image != null)
+            {
+                pictureBox2.Image = img2Origin;
+            }
+
+            if (pictureBox3.Image != null) {
+                pictureBox3.Image = null;
+            }
+            
         }
     }
 }
