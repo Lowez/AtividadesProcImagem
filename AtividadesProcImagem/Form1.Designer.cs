@@ -471,6 +471,7 @@
             this.cbMelhorias.Name = "cbMelhorias";
             this.cbMelhorias.Size = new System.Drawing.Size(141, 21);
             this.cbMelhorias.TabIndex = 35;
+            this.cbMelhorias.SelectedIndexChanged += new System.EventHandler(this.cbMelhorias_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -524,7 +525,10 @@
             this.cbFiltros.Items.AddRange(new object[] {
             "Min",
             "Max",
-            "Mean(Media)"});
+            "Mean(Media)",
+            "Mediana",
+            "Ordem",
+            "Suavização Conservativa"});
             this.cbFiltros.Location = new System.Drawing.Point(580, 649);
             this.cbFiltros.Name = "cbFiltros";
             this.cbFiltros.Size = new System.Drawing.Size(141, 21);
