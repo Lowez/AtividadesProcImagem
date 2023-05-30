@@ -62,6 +62,12 @@
     <Compile Include="valorDaOrdem.Designer.cs">
       <DependentUpon>valorDaOrdem.cs</DependentUpon>
     </Compile>
+    <Compile Include="valorGaussiano.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="valorGaussiano.Designer.cs">
+      <DependentUpon>valorGaussiano.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +82,9 @@
     </Compile>
     <EmbeddedResource Include="valorDaOrdem.resx">
       <DependentUpon>valorDaOrdem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="valorGaussiano.resx">
+      <DependentUpon>valorGaussiano.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

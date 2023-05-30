@@ -464,7 +464,6 @@
             // 
             this.cbMelhorias.FormattingEnabled = true;
             this.cbMelhorias.Items.AddRange(new object[] {
-            "SDBIS",
             "Negativo",
             "Equalização de Histograma"});
             this.cbMelhorias.Location = new System.Drawing.Point(580, 556);
@@ -528,7 +527,8 @@
             "Mean(Media)",
             "Mediana",
             "Ordem",
-            "Suavização Conservativa"});
+            "Suavização Conservativa",
+            "Gaussiana"});
             this.cbFiltros.Location = new System.Drawing.Point(580, 649);
             this.cbFiltros.Name = "cbFiltros";
             this.cbFiltros.Size = new System.Drawing.Size(141, 21);

@@ -712,7 +712,7 @@ namespace AtividadesProcImagem
             {
                 for (int j = 0; j < image1.Height; j++)
                 {
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -864,7 +864,6 @@ namespace AtividadesProcImagem
 
         private void btAplicarMelhoria_Click(object sender, EventArgs e)
         {
-            String SDBIS = "SDBIS";
             String Negativo = "Negativo";
             String Equalizacao = "Equalização de Histograma";
 
@@ -872,11 +871,7 @@ namespace AtividadesProcImagem
 
             if (cbMelhorias.SelectedIndex != -1)
             {
-                if (cbMelhorias.Text == SDBIS)
-                {
-                    applySDBIS(image1);
-                }
-                else if (cbMelhorias.Text == Negativo)
+                if (cbMelhorias.Text == Negativo)
                 {
                     applyNegativo(image1);
                 }
@@ -902,7 +897,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -959,7 +954,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -1016,7 +1011,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -1079,7 +1074,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -1098,27 +1093,23 @@ namespace AtividadesProcImagem
                     for (int w = 0; w < mask.Length; w++)
                         mask[w] = 1;
 
-                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
-                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
-                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
+                    mask[0] = (byte)vImg1Gray[i - 1, j - 1];
+                    mask[1] = (byte)vImg1Gray[i - 1, j];
+                    mask[2] = (byte)vImg1Gray[i - 1, j + 1];
 
-                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
-                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
-                    mask[5] = (byte)(mask[5] * vImg1Gray[i, j + 1]);
+                    mask[3] = (byte)vImg1Gray[i, j - 1];
+                    mask[4] = (byte)vImg1Gray[i, j];
+                    mask[5] = (byte)vImg1Gray[i, j + 1];
 
-                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j - 1]);
-                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
-                    mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
+                    mask[6] = (byte)vImg1Gray[i + 1, j - 1];
+                    mask[7] = (byte)vImg1Gray[i + 1, j];
+                    mask[8] = (byte)vImg1Gray[i + 1, j + 1];
 
-                    int acc = 0;
-                    for (int k = 0; k < mask.Length; k++)
-                    {
-                        acc += mask[k];
-                    }
+                    Array.Sort(mask);
 
-                    byte mean = (byte)(acc / 9);
+                    byte mediana = (byte)mask[4];
 
-                    Color p2 = Color.FromArgb(mean, mean, mean);
+                    Color p2 = Color.FromArgb(mediana, mediana, mediana);
 
                     image3.SetPixel(i, j, p2);
                 }
@@ -1137,7 +1128,7 @@ namespace AtividadesProcImagem
 
             valorDaOrdem form = new valorDaOrdem();
             var result = form.ShowDialog();
-            int bitOrdem;
+            int bitOrdem = 0;
             if (result == DialogResult.OK)
             {
                 this.DialogResult = DialogResult.OK;
@@ -1151,7 +1142,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -1182,15 +1173,11 @@ namespace AtividadesProcImagem
                     mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
                     mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
 
-                    int acc = 0;
-                    for (int k = 0; k < mask.Length; k++)
-                    {
-                        acc += mask[k];
-                    }
+                    Array.Sort(mask);
 
-                    byte mean = (byte)(acc / 9);
+                    byte ordem = (byte)mask[bitOrdem];
 
-                    Color p2 = Color.FromArgb(mean, mean, mean);
+                    Color p2 = Color.FromArgb(ordem, ordem, ordem);
 
                     image3.SetPixel(i, j, p2);
                 }
@@ -1214,7 +1201,7 @@ namespace AtividadesProcImagem
                 for (int j = 1; j < image1.Height - 1; j++)
                 {
 
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
@@ -1229,7 +1216,83 @@ namespace AtividadesProcImagem
                         image1.SetPixel(i, j, p);
                     }
 
-                    byte[] mask = new byte[9];
+                    byte[] mask = new byte[8];
+                    for (int w = 0; w < mask.Length; w++)
+                        mask[w] = 1;
+
+                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
+                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
+                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
+
+                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
+                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j + 1]);
+
+                    mask[5] = (byte)(mask[5] * vImg1Gray[i + 1, j - 1]);
+                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j]);
+                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j + 1]);
+
+                    Array.Sort(mask);
+
+                    if ((byte)vImg1Gray[i, j] < mask[0])
+                    {
+                        vImg1Gray[i, j] = mask[0];
+                    }
+                    else if ((byte)vImg1Gray[i, j] > mask[7])
+                    {
+                        vImg1Gray[i, j] = mask[7];
+                    }
+
+                    byte suav = (byte)vImg1Gray[i, j];
+
+                    Color p2 = Color.FromArgb(suav, suav, suav);
+
+                    image3.SetPixel(i, j, p2);
+                }
+            }
+
+            pictureBox3.Image = image3;
+        }
+
+        private void filtroGau(Bitmap image1) 
+        {
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
+            }
+
+            valorGaussiano form = new valorGaussiano();
+            var result = form.ShowDialog();
+            int desvio = 0;
+            if (result == DialogResult.OK)
+            {
+                this.DialogResult = DialogResult.OK;
+                desvio = form.getDesvio();
+            }
+
+            Bitmap image3 = new Bitmap(image1.Width, image1.Height);
+
+            for (int i = 1; i < image1.Width - 1; i++)
+            {
+                for (int j = 1; j < image1.Height - 1; j++)
+                {
+
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
+                    {
+
+                        //Greyscale
+                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
+
+                        Color p = Color.FromArgb(grey, grey, grey);
+
+                        vImg1R[i, j] = (byte)grey;
+                        vImg1G[i, j] = (byte)grey;
+                        vImg1B[i, j] = (byte)grey;
+
+                        image1.SetPixel(i, j, p);
+                    }
+
+                    byte[] mask = new byte[8];
                     for (int w = 0; w < mask.Length; w++)
                         mask[w] = 1;
 
@@ -1239,21 +1302,26 @@ namespace AtividadesProcImagem
 
                     mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
                     mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
-                    mask[5] = (byte)(mask[5] * vImg1Gray[i, j + 1]);
+                    mask[5] = (byte)(mask[4] * vImg1Gray[i, j + 1]);
 
-                    mask[6] = (byte)(mask[6] * vImg1Gray[i + 1, j - 1]);
-                    mask[7] = (byte)(mask[7] * vImg1Gray[i + 1, j]);
-                    mask[8] = (byte)(mask[8] * vImg1Gray[i + 1, j + 1]);
+                    mask[6] = (byte)(mask[5] * vImg1Gray[i + 1, j - 1]);
+                    mask[7] = (byte)(mask[6] * vImg1Gray[i + 1, j]);
+                    mask[8] = (byte)(mask[7] * vImg1Gray[i + 1, j + 1]);
 
-                    int acc = 0;
-                    for (int k = 0; k < mask.Length; k++)
+                    Array.Sort(mask);
+
+                    if ((byte)vImg1Gray[i, j] < mask[0])
                     {
-                        acc += mask[k];
+                        vImg1Gray[i, j] = mask[0];
+                    }
+                    else if ((byte)vImg1Gray[i, j] > mask[7])
+                    {
+                        vImg1Gray[i, j] = mask[7];
                     }
 
-                    byte mean = (byte)(acc / 9);
+                    byte suav = (byte)vImg1Gray[i, j];
 
-                    Color p2 = Color.FromArgb(mean, mean, mean);
+                    Color p2 = Color.FromArgb(suav, suav, suav);
 
                     image3.SetPixel(i, j, p2);
                 }
@@ -1270,6 +1338,7 @@ namespace AtividadesProcImagem
             String mediana = "Mediana";
             String ordem = "Ordem";
             String suavizacao = "Suavização Conservativa";
+            String gaussiana = "Gaussiana";
 
             Bitmap image1 = (Bitmap)pictureBox1.Image;
 
@@ -1299,6 +1368,10 @@ namespace AtividadesProcImagem
                 {
                     filtroSuav(image1);
                 }
+                else if (cbFiltros.Text == gaussiana)
+                {
+                    filtroGau(image1);
+                }
             }
         }
 
@@ -1322,7 +1395,7 @@ namespace AtividadesProcImagem
             {
                 for (int j = 0; j < image1.Height; j++)
                 {
-                    if (image1 != null)
+                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
                     {
 
                         //Greyscale
