@@ -13,11 +13,11 @@ namespace AtividadesProcImagem
     public partial class valorGaussiano : Form
     {
 
-        public int desvio;
+        public double sigma;
 
-        public int getDesvio()
+        public double getSigma()
         {
-            return desvio;
+            return sigma;
         }
 
         public valorGaussiano()
@@ -29,7 +29,7 @@ namespace AtividadesProcImagem
         {
             if (txDesvio.Text != "")
             {
-                desvio = Convert.ToInt32(txDesvio.Text);
+                sigma = Convert.ToDouble(txDesvio.Text);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();

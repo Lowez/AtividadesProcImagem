@@ -22,3 +22,5 @@ D:\my\proc_img\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesPro
 D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.brightnessLabel.resources
 D:\my\proc_img\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.valorDaOrdem.resources
 D:\my\proc_img\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.valorGaussiano.resources
+D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.valorDaOrdem.resources
+D:\Minhas Coisas\URI\Matérias\Quinto\proc_imagem\AtividadesProcImagem\AtividadesProcImagem\obj\Debug\AtividadesProcImagem.valorGaussiano.resources

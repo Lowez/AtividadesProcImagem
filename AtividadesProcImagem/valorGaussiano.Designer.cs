@@ -50,7 +50,7 @@
             // 
             this.txDesvio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txDesvio.Location = new System.Drawing.Point(145, 109);
-            this.txDesvio.MaxLength = 1;
+            this.txDesvio.MaxLength = 3;
             this.txDesvio.Name = "txDesvio";
             this.txDesvio.Size = new System.Drawing.Size(100, 26);
             this.txDesvio.TabIndex = 5;
@@ -60,12 +60,12 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(12, 32);
+            this.label1.Location = new System.Drawing.Point(20, 29);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(366, 48);
+            this.label1.Size = new System.Drawing.Size(361, 48);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Digite um valor de 0-1\r\n para definir o parâmetro de desvio-padrão\r\n";
+            this.label1.Text = "Digite um valor  \r\npara definir o parâmetro de desvio-padrão\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // valorGaussiano

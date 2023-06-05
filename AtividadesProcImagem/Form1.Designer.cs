@@ -80,6 +80,9 @@
             this.histogramaEqualizado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btToDouble = new System.Windows.Forms.Button();
             this.btReset = new System.Windows.Forms.Button();
+            this.filtragemGaus = new System.Windows.Forms.GroupBox();
+            this.pictureBoxKernel = new System.Windows.Forms.PictureBox();
+            this.txSigmaValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -87,6 +90,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.histogramaOriginal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bright)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.histogramaEqualizado)).BeginInit();
+            this.filtragemGaus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxKernel)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -470,7 +475,6 @@
             this.cbMelhorias.Name = "cbMelhorias";
             this.cbMelhorias.Size = new System.Drawing.Size(141, 21);
             this.cbMelhorias.TabIndex = 35;
-            this.cbMelhorias.SelectedIndexChanged += new System.EventHandler(this.cbMelhorias_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -588,6 +592,39 @@
             this.btReset.UseVisualStyleBackColor = false;
             this.btReset.Click += new System.EventHandler(this.btReset_Click);
             // 
+            // filtragemGaus
+            // 
+            this.filtragemGaus.Controls.Add(this.txSigmaValue);
+            this.filtragemGaus.Controls.Add(this.pictureBoxKernel);
+            this.filtragemGaus.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.filtragemGaus.Location = new System.Drawing.Point(1119, 90);
+            this.filtragemGaus.Name = "filtragemGaus";
+            this.filtragemGaus.Size = new System.Drawing.Size(203, 198);
+            this.filtragemGaus.TabIndex = 45;
+            this.filtragemGaus.TabStop = false;
+            this.filtragemGaus.Text = "Filtragem Gaussiana";
+            this.filtragemGaus.Visible = false;
+            // 
+            // pictureBoxKernel
+            // 
+            this.pictureBoxKernel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBoxKernel.Location = new System.Drawing.Point(65, 59);
+            this.pictureBoxKernel.Name = "pictureBoxKernel";
+            this.pictureBoxKernel.Size = new System.Drawing.Size(98, 98);
+            this.pictureBoxKernel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxKernel.TabIndex = 46;
+            this.pictureBoxKernel.TabStop = false;
+            // 
+            // txSigmaValue
+            // 
+            this.txSigmaValue.AutoSize = true;
+            this.txSigmaValue.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.txSigmaValue.Location = new System.Drawing.Point(72, 43);
+            this.txSigmaValue.Name = "txSigmaValue";
+            this.txSigmaValue.Size = new System.Drawing.Size(42, 13);
+            this.txSigmaValue.TabIndex = 46;
+            this.txSigmaValue.Text = "Sigma: ";
+            // 
             // brightnessLabel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -595,7 +632,8 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(1359, 749);
+            this.ClientSize = new System.Drawing.Size(1359, 843);
+            this.Controls.Add(this.filtragemGaus);
             this.Controls.Add(this.btReset);
             this.Controls.Add(this.btToDouble);
             this.Controls.Add(this.label12);
@@ -641,7 +679,6 @@
             this.Name = "brightnessLabel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -649,6 +686,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.histogramaOriginal)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bright)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.histogramaEqualizado)).EndInit();
+            this.filtragemGaus.ResumeLayout(false);
+            this.filtragemGaus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxKernel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,6 +741,9 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart histogramaEqualizado;
         private System.Windows.Forms.Button btToDouble;
         private System.Windows.Forms.Button btReset;
+        private System.Windows.Forms.GroupBox filtragemGaus;
+        private System.Windows.Forms.Label txSigmaValue;
+        private System.Windows.Forms.PictureBox pictureBoxKernel;
     }
 }
 

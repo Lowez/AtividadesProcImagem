@@ -342,10 +342,10 @@ namespace AtividadesProcImagem
             Bitmap subtImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
             Bitmap image2 = (Bitmap)pictureBox2.Image;
-            
+
             if (checkExistance() == false) { return; }
 
-                if (Convert.ToInt32(bright.Value) != 0)
+            if (Convert.ToInt32(bright.Value) != 0)
             {
                 if (checkExistance() == false) { return; }
 
@@ -521,7 +521,7 @@ namespace AtividadesProcImagem
 
             if (checkExistance("needed") == false) { return; }
 
-            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
+            if (checkDimensions(img1, img2) == false) { return; }
 
             for (x = 0; x < andImage.Width; x++)
             {
@@ -553,7 +553,7 @@ namespace AtividadesProcImagem
 
             if (checkExistance("needed") == false) { return; }
 
-            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
+            if (checkDimensions(img1, img2) == false) { return; }
 
             int x, y;
 
@@ -587,7 +587,7 @@ namespace AtividadesProcImagem
 
             if (checkExistance("needed") == false) { return; }
 
-            if (checkDimensions(img1Origin, img2Origin) == false) { return; }
+            if (checkDimensions(img1, img2) == false) { return; }
 
             int x, y;
 
@@ -619,9 +619,11 @@ namespace AtividadesProcImagem
         {
             Bitmap blendImage = (Bitmap)pictureBox1.Image;
             Bitmap image1 = (Bitmap)pictureBox1.Image;
+            Bitmap image2 = (Bitmap)pictureBox2.Image;
             double fator = 1.0;
 
-            if (checkDimensions(image1, img2Origin) == false) { return; }
+            if (checkExistance("needed") == false) { return; }
+            if (checkDimensions(image1, image2) == false) { return; }
 
             if (blendingFactor.Text != "") fator = Convert.ToDouble(blendingFactor.Text);
 
@@ -814,24 +816,29 @@ namespace AtividadesProcImagem
                 }
             }
 
-            double[] CFD = new double[256];
+            // Função de Distribuição Cumulativa
+            double[] FDC = new double[256];
             int pixelsCount = width * width;
-            CFD[0] = pixelIntensityRate[0] / (double)pixelsCount;
+            FDC[0] = pixelIntensityRate[0] / (double)pixelsCount;
+
             for (int i = 1; i < 256; i++)
             {
-                CFD[i] = CFD[i - 1] + pixelIntensityRate[i] / (double)pixelsCount;
+                FDC[i] = FDC[i - 1] + pixelIntensityRate[i] / (double)pixelsCount;
             }
 
 
             byte[,] imagemFinal = new byte[width, height];
 
             int[] finalPixelRate = new int[256];
+
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    int pixel = vImg1Gray[i, j];
-                    imagemFinal[i, j] = (byte)Math.Round(CFD[pixel] * 255.0);
+                    int pixel = image1.GetPixel(i, j).R;
+
+                    imagemFinal[i, j] = (byte)Math.Floor((FDC[pixel] - FDC.Min()) / (1 - FDC.Min()) * (256 - 1));
+
                     finalPixelRate[imagemFinal[i, j]]++;
                 }
             }
@@ -1263,71 +1270,126 @@ namespace AtividadesProcImagem
 
             valorGaussiano form = new valorGaussiano();
             var result = form.ShowDialog();
-            int desvio = 0;
+            double desvio = 0;
             if (result == DialogResult.OK)
             {
                 this.DialogResult = DialogResult.OK;
-                desvio = form.getDesvio();
+                desvio = form.getSigma();
+            }
+
+            if (image1 == null)
+            {
+                MessageBox.Show("Selecione uma imagem para a imagem 1.");
+                return;
             }
 
             Bitmap image3 = new Bitmap(image1.Width, image1.Height);
 
-            for (int i = 1; i < image1.Width - 1; i++)
+            if (image1.PixelFormat == PixelFormat.Format8bppIndexed)
             {
-                for (int j = 1; j < image1.Height - 1; j++)
+                double sigma = 0;
+                if (result == DialogResult.OK)
                 {
-
-                    if (image1.PixelFormat != PixelFormat.Format8bppIndexed)
-                    {
-
-                        //Greyscale
-                        int grey = (vImg1R[i, j] + vImg1G[i, j] + vImg1B[i, j]) / 3;
-
-                        Color p = Color.FromArgb(grey, grey, grey);
-
-                        vImg1R[i, j] = (byte)grey;
-                        vImg1G[i, j] = (byte)grey;
-                        vImg1B[i, j] = (byte)grey;
-
-                        image1.SetPixel(i, j, p);
-                    }
-
-                    byte[] mask = new byte[8];
-                    for (int w = 0; w < mask.Length; w++)
-                        mask[w] = 1;
-
-                    mask[0] = (byte)(mask[0] * vImg1Gray[i - 1, j - 1]);
-                    mask[1] = (byte)(mask[1] * vImg1Gray[i - 1, j]);
-                    mask[2] = (byte)(mask[2] * vImg1Gray[i - 1, j + 1]);
-
-                    mask[3] = (byte)(mask[3] * vImg1Gray[i, j - 1]);
-                    mask[4] = (byte)(mask[4] * vImg1Gray[i, j]);
-                    mask[5] = (byte)(mask[4] * vImg1Gray[i, j + 1]);
-
-                    mask[6] = (byte)(mask[5] * vImg1Gray[i + 1, j - 1]);
-                    mask[7] = (byte)(mask[6] * vImg1Gray[i + 1, j]);
-                    mask[8] = (byte)(mask[7] * vImg1Gray[i + 1, j + 1]);
-
-                    Array.Sort(mask);
-
-                    if ((byte)vImg1Gray[i, j] < mask[0])
-                    {
-                        vImg1Gray[i, j] = mask[0];
-                    }
-                    else if ((byte)vImg1Gray[i, j] > mask[7])
-                    {
-                        vImg1Gray[i, j] = mask[7];
-                    }
-
-                    byte suav = (byte)vImg1Gray[i, j];
-
-                    Color p2 = Color.FromArgb(suav, suav, suav);
-
-                    image3.SetPixel(i, j, p2);
+                    this.DialogResult = DialogResult.OK;
+                    sigma = form.getSigma();
                 }
+
+                int size = 5;
+                int radius = size / 2;
+                double[,] kernel = GenerateGaussianKernel(size, sigma);
+
+                // cria uma imagem em escala de cinza com o mesmo tamanho do kernel
+                Bitmap kernelImage = new Bitmap(size, size, PixelFormat.Format8bppIndexed);
+
+                // define a paleta de cores para a imagem em escala de cinza
+                ColorPalette palette = kernelImage.Palette;
+                for (int i = 0; i < 256; i++)
+                {
+                    palette.Entries[i] = Color.FromArgb(i, i, i);
+                }
+                kernelImage.Palette = palette;
+
+                // obtém o endereço da memória da imagem em escala de cinza
+                BitmapData data = kernelImage.LockBits(new Rectangle(0, 0, kernelImage.Width, kernelImage.Height), ImageLockMode.WriteOnly, kernelImage.PixelFormat);
+                IntPtr ptr = data.Scan0;
+
+                // preenche os pixels da imagem em escala de cinza com os valores do kernel
+                for (int i = 0; i < size; i++)
+                {
+                    for (int j = 0; j < size; j++)
+                    {
+                        byte intensity = (byte)Math.Round(kernel[i, j] * 255.0);
+                        Marshal.WriteByte(ptr, i + j * data.Stride, intensity);
+                    }
+                }
+
+                // libera o endereço da memória da imagem em escala de cinza
+                kernelImage.UnlockBits(data);
+
+                // redimensiona a imagem e exibe no PictureBox
+                int squareSize = 50;
+                Bitmap resizedImage = new Bitmap(kernelImage, new Size(squareSize, squareSize));
+                pictureBoxKernel.Image = resizedImage;
+                txSigmaValue.Text = "Sigma: " + sigma.ToString();
+                filtragemGaus.Visible= true;
+
+                for (int i = radius; i < image1.Width - radius; i++)
+                {
+                    for (int j = radius; j < image1.Height - radius; j++)
+                    {
+                        double sum = 0.0;
+
+                        for (int k = 0; k < size; k++)
+                        {
+                            for (int l = 0; l < size; l++)
+                            {
+                                byte pixelValue = vImg1Gray[i + k - radius, j + l - radius];
+                                sum += pixelValue * kernel[k, l];
+                            }
+                        }
+
+                        byte newValue = (byte)Math.Round(sum);
+                        Color p2 = Color.FromArgb(newValue, newValue, newValue);
+                        image3.SetPixel(i, j, p2);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Apenas imagens cinza suportadas para este filtro!");
             }
 
             pictureBox3.Image = image3;
+
+        }
+
+        private double[,] GenerateGaussianKernel(int size, double sigma)
+        {
+            int radius = size / 2;
+            double[,] kernel = new double[size, size];
+            double kernelSum = 0.0;
+
+            for (int i = -radius; i <= radius; i++)
+            {
+                for (int j = -radius; j <= radius; j++)
+                {
+                    double distance = Math.Sqrt(i * i + j * j);
+                    double weight = Math.Exp(-(distance * distance) / (2 * sigma * sigma));
+                    kernel[i + radius, j + radius] = weight;
+                    kernelSum += weight;
+                }
+            }
+
+            // Normalize the kernel
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    kernel[i, j] /= kernelSum;
+                }
+            }
+
+            return kernel;
         }
 
         private void btAplicarFiltros_Click(object sender, EventArgs e)
@@ -1458,22 +1520,27 @@ namespace AtividadesProcImagem
             if (pictureBox1.Image != null)
             {
                 pictureBox1.Image = img1Origin;
+                vImg1Gray = vImg1GrayOrigin;
+                vImg1R = vImg1ROrigin;
+                vImg1G = vImg1GOrigin;
+                vImg1B = vImg1BOrigin;
+                vImg1A = vImg1AOrigin;
             }
 
             if (pictureBox2.Image != null)
             {
                 pictureBox2.Image = img2Origin;
+                vImg2Gray = vImg2GrayOrigin;
+                vImg2R = vImg2ROrigin;
+                vImg2G = vImg2GOrigin;
+                vImg2B = vImg2BOrigin;
+                vImg2A = vImg2AOrigin;
             }
 
             if (pictureBox3.Image != null) {
                 pictureBox3.Image = null;
             }
             
-        }
-
-        private void cbMelhorias_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
