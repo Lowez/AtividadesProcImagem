@@ -1296,8 +1296,9 @@ namespace AtividadesProcImagem
 
                 int size = 5;
                 int radius = size / 2;
-                double[,] kernel = GenerateGaussianKernel(size, sigma);
+                double[,] kernel = GeraKernel(size, sigma);
 
+                // Formação do Quadradinho representante do Kernel
                 // cria uma imagem em escala de cinza com o mesmo tamanho do kernel
                 Bitmap kernelImage = new Bitmap(size, size, PixelFormat.Format8bppIndexed);
 
@@ -1363,7 +1364,7 @@ namespace AtividadesProcImagem
 
         }
 
-        private double[,] GenerateGaussianKernel(int size, double sigma)
+        private double[,] GeraKernel(int size, double sigma)
         {
             int radius = size / 2;
             double[,] kernel = new double[size, size];
@@ -1380,7 +1381,7 @@ namespace AtividadesProcImagem
                 }
             }
 
-            // Normalize the kernel
+            // Normalização do kernel
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
