@@ -22,6 +22,7 @@ namespace AtividadesProcImagem
             InitializeComponent();
         }
 
+        // Iniciação das variaveis Bitmap para as imagens que serão usadas
         Bitmap img1;
         byte[,] vImg1Gray;
         byte[,] vImg1R;
@@ -52,6 +53,7 @@ namespace AtividadesProcImagem
 
         int resultIndex = 0;
 
+        // Função para validar se as imagens tem as mesmas dimensões para evitar erros
         private bool checkDimensions(Bitmap img1, Bitmap img2)
         {
             int size1 = img1.Width + img1.Height;
@@ -73,6 +75,7 @@ namespace AtividadesProcImagem
             return true;
         }
 
+        // Função para validar se a imagem que será alterada existe
         private bool checkExistance(String image2 = "notneeded") {
             
             if (img1 == null)
@@ -102,6 +105,23 @@ namespace AtividadesProcImagem
             return true;
         }
 
+        private bool checkNumericValue(String value)
+        {
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (!Char.IsDigit(value[i]))
+                {
+                    MessageBox.Show("O valor dado deve ser numérico");
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
+
+        // Código para carregar a imagem 1
         private void load1_Click_1(object sender, EventArgs e)
         {
             // Configurações iniciais da OpenFileDialogBox
@@ -185,6 +205,7 @@ namespace AtividadesProcImagem
             // pictureBox1.Load("C:\\Users\\Computação\\Downloads\\Material Matlab\\Matlab\\Add1.jpg");
         }
 
+        // Código para carregar a imagem 2
         private void load2_Click_1(object sender, EventArgs e)
         {
             // Configurações iniciais da OpenFileDialogBox
@@ -268,6 +289,7 @@ namespace AtividadesProcImagem
             // pictureBox1.Load("C:\\Users\\Computação\\Downloads\\Material Matlab\\Matlab\\Add1.jpg");
         }
 
+        // Código para efetuar a soma das imagens, ou do brilho
         private void adicao_Click(object sender, EventArgs e)
         {
             Bitmap addImage = (Bitmap)pictureBox1.Image;
@@ -276,6 +298,8 @@ namespace AtividadesProcImagem
 
             if (checkExistance() == false) { return; }
 
+            // Caso o valor do scroll brilho seja diferente de zero,
+            // significa que deve ser feita modificação do brilho, e não soma de imagens
             if (Convert.ToInt32(bright.Value) != 0)
             {
 
@@ -337,6 +361,7 @@ namespace AtividadesProcImagem
             }
         }
 
+        // Código para efetuar a subtração das imagens, ou do brilho
         private void subtracao_Click(object sender, EventArgs e)
         {
             Bitmap subtImage = (Bitmap)pictureBox1.Image;
@@ -345,6 +370,8 @@ namespace AtividadesProcImagem
 
             if (checkExistance() == false) { return; }
 
+            // Caso o valor do scroll brilho seja diferente de zero,
+            // significa que deve ser feita modificação do brilho, e não subtração de imagens
             if (Convert.ToInt32(bright.Value) != 0)
             {
                 if (checkExistance() == false) { return; }
@@ -415,6 +442,8 @@ namespace AtividadesProcImagem
 
             if (checkExistance() == false) { return; }
 
+            if (checkNumericValue(multiplicacaoInput.Text)) return;
+
             if (multiplicacaoInput.Text != "") fator = Convert.ToDouble(multiplicacaoInput.Text);
 
             int x, y;
@@ -451,6 +480,8 @@ namespace AtividadesProcImagem
 
             if (checkExistance() == false) { return; }
 
+            if (checkNumericValue(divisaoInput.Text)) return;
+
             if (divisaoInput.Text != "") fator = Convert.ToDouble(divisaoInput.Text);
 
             int x, y;
@@ -463,12 +494,16 @@ namespace AtividadesProcImagem
                     Color newColor = new Color();
                     int newR = (int)((int)vImg1R[x, y] / fator);
                     newR = newR <= 0 ? 0 : newR;
+                    newR = newR >= 255 ? 255 : newR;
                     int newG = (int)((int)vImg1G[x, y] / fator);
                     newG = newG <= 0 ? 0 : newG;
+                    newG = newG >= 255 ? 255 : newG;
                     int newB = (int)((int)vImg1B[x, y] / fator);
                     newB = newB <= 0 ? 0 : newB;
+                    newB = newB >= 255 ? 255 : newB;
                     int newA = (int)((int)vImg1A[x, y] / fator);
                     newA = newA <= 0 ? 0 : newA;
+                    newA = newA >= 255 ? 255 : newA;
 
                     newColor = Color.FromArgb((int)newA, (int)newR, (int)newG, (int)newB);
 
@@ -624,6 +659,8 @@ namespace AtividadesProcImagem
 
             if (checkExistance("needed") == false) { return; }
             if (checkDimensions(image1, image2) == false) { return; }
+
+            if (checkNumericValue(blendingFactor.Text)) return;
 
             if (blendingFactor.Text != "") fator = Convert.ToDouble(blendingFactor.Text);
 
@@ -816,7 +853,7 @@ namespace AtividadesProcImagem
                 }
             }
 
-            // Função de Distribuição Cumulativa
+            // Distribuição Cumulativa de Frequências
             double[] FDC = new double[256];
             int pixelsCount = width * width;
             FDC[0] = pixelIntensityRate[0] / (double)pixelsCount;
@@ -1393,6 +1430,8 @@ namespace AtividadesProcImagem
             return kernel;
         }
 
+        // Função para aplicar filtros na imagem 1
+        // A seleção do filtro é feito baseando-se na opção escolhida na combo box
         private void btAplicarFiltros_Click(object sender, EventArgs e)
         {
             String max = "Max";
